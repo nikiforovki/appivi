@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/eslint/eslint/master/conf.json",
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "import/extensions": "off",
+        "import/no-duplicates": "error"
+      }
+    }
+  ],
+  "rules": {
+    "no-console": "warn",
+    "react/jsx-no-undef": "error",
+    "react/no-unescaped-entities": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "pragmaFrag": "React.Fragment",
+      "throwIfNamespace": true
+    }
+  }
+}
+

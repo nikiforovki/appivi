@@ -1,0 +1,57 @@
+:root {
+  --background-color: rgb(211, 211, 211);
+  --text-color: #faf7f7;
+  --primary-color: #a7a7e7;
+  --secondary-color: #f0f0f0;
+}
+
+body.dark-mode {
+  --background-color: rgb(30, 33, 61);
+  --text-color: #fff;
+  --primary-color: #6c63ff;
+  --secondary-color: #333;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'HelveticaNeue', sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('../../public/assets/HelveticaNeue/HelveticaNeue-Medium.otf');
+}
+
+.App {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
