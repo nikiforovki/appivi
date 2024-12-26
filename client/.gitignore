@@ -1,0 +1,11 @@
+node_modules/
+dist/
+history/
+*.log
+*.lock
+*.tmp
+.idea/
+.vscode/
+.env
+
+
