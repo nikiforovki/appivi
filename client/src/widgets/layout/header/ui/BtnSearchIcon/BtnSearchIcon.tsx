@@ -1,0 +1,36 @@
+import React from 'react';
+import styled from 'styled-components';
+import SearchIcon from '@/shared/assets/icons/SearchIcon';
+import IconComponent from '@/shared/assets/icons/IconComponent';
+import { BtnSearchIconProps } from './types';
+
+const StyledBtnSearchIconWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 130px;
+  height: 40px;
+  background-color: #1f1b2e;
+  border-radius: 8px;
+  color: whitesmoke;
+  border: 1px solid #1f1b2e;
+  box-shadow: 0 2px 4px #1f1b2e;
+  cursor: pointer;
+  font-family: 'HelveticaNeue', sans-serif;
+
+  // @media (max-width: 680px) {
+  //   display: none;
+  // }
+`;
+
+const BtnSearchIcon: React.FC<BtnSearchIconProps> = ({ onClick }) => {
+  return (
+    <StyledBtnSearchIconWrapper onClick={onClick}>
+      <SearchIcon />
+      Поиск
+      <IconComponent />
+    </StyledBtnSearchIconWrapper>
+  );
+};
+
+export default BtnSearchIcon;

@@ -2,8 +2,8 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import Dotenv from 'dotenv-webpack';
 
-// Определяем новый интерфейс для прокси-объекта
 interface ProxyConfig {
   context?: string[];
   target?: string;
@@ -12,7 +12,6 @@ interface ProxyConfig {
   pathRewrite?: { [key: string]: string };
 }
 
-// Определяем новый интерфейс для DevServerConfiguration
 interface DevServerConfig extends DevServerConfiguration {
   host?: string;
   port?: number;
@@ -20,9 +19,9 @@ interface DevServerConfig extends DevServerConfiguration {
     directory?: string;
   };
   proxy?: Array<ProxyConfig>;
+  historyApiFallback?: boolean;
 }
 
-// Обновляем интерфейс Configuration
 interface Configuration extends WebpackConfiguration {
   devServer?: DevServerConfig;
 }
@@ -88,48 +87,13 @@ const config: Configuration = {
       directory: path.join(__dirname, 'public'),
     },
     compress: true,
-    // proxy: [
-    //   {
-    //     context: ['/__/auth'],
-    //     target: 'http://127.0.0.1:9099',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    //   {
-    //     context: ['/__/firestore'],
-    //     target: 'http://127.0.0.1:8080',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    //   {
-    //     context: ['/__/functions'],
-    //     target: 'http://127.0.0.1:5001',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    //   {
-    //     context: ['/__/storage'],
-    //     target: 'http://127.0.0.1:9199',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    //   // Добавляем прокси для Firebase Authentication
-    //   {
-    //     context: [
-    //       '/identitytoolkit.googleapis.com',
-    //       '/securetoken.googleapis.com',
-    //     ],
-    //     target: 'https://identitytoolkit.googleapis.com',
-    //     changeOrigin: true,
-    //     secure: false,
-    //     pathRewrite: { '^/identitytoolkit.googleapis.com': '' },
-    //   },
-    // ],
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
+    new Dotenv() as any,
   ],
 };
 

@@ -41,6 +41,38 @@ if (!fs.existsSync(subscriptionsDir)) {
   );
 }
 
+// Загрузка подписок из директории subscriptions при старте сервера
+function loadSubscriptions() {
+  fs.readdir(subscriptionsDir, (err, files) => {
+    if (err) {
+      console.error("Ошибка при чтении директории подписок:", err);
+      return;
+    }
+
+    files.forEach((file) => {
+      const filePath = path.join(subscriptionsDir, file);
+      const fileData = fs.readFileSync(filePath, "utf-8");
+      try {
+        const subscriptionData = JSON.parse(fileData);
+        userSubscriptions[subscriptionData.email] = subscriptionData;
+        console.log(
+          `Загружена подписка для пользователя: ${subscriptionData.email}`
+        );
+      } catch (parseError) {
+        console.error(
+          `Ошибка при парсинге файла подписки ${file}:`,
+          parseError
+        );
+      }
+    });
+
+    console.log("Подписки загружены:", userSubscriptions);
+  });
+}
+
+// Загрузка подписок при старте сервера
+loadSubscriptions();
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
@@ -107,14 +139,6 @@ app.post("/api/subscriptions", (req, res) => {
     return res.status(400).send("Отсутствуют обязательные поля.");
   }
 
-  userSubscriptions[id] = {
-    email,
-    token,
-    subscription,
-    status,
-    error,
-  };
-
   const userData = {
     email,
     token,
@@ -123,6 +147,10 @@ app.post("/api/subscriptions", (req, res) => {
     error,
   };
 
+  // Сохранение подписки в памяти
+  userSubscriptions[email] = userData;
+
+  // Сохранение подписки в файл
   const fileName = `${email}.json`;
   const filePath = path.join(subscriptionsDir, fileName);
 
@@ -138,23 +166,34 @@ app.post("/api/subscriptions", (req, res) => {
         );
     }
 
-    console.log(`Данные подписки успешно сохранены для пользователя: ${id}`);
+    console.log(`Данные подписки успешно сохранены для пользователя: ${email}`);
     res.json({
       message: "Данные подписки успешно сохранены",
-      subscription: userSubscriptions[id],
+      subscription: userData,
     });
   });
 });
 
-app.get("/api/users/:userId", (req, res) => {
-  const userId = req.params.userId;
-  const user = userSubscriptions[userId];
+app.get("/api/users/:email", (req, res) => {
+  const email = req.params.email;
+  const fileName = `${email}.json`; // Имя файла, соответствующее email пользователя
+  const filePath = path.join(subscriptionsDir, fileName); // Полный путь к файлу
 
-  if (user) {
-    console.log(`Получение данных о подписке пользователя ID: ${userId}`);
-    res.json(user);
+  // Проверяем, существует ли файл
+  if (fs.existsSync(filePath)) {
+    try {
+      // Читаем данные из файла
+      const fileData = fs.readFileSync(filePath, "utf-8");
+      const userData = JSON.parse(fileData);
+
+      console.log(`Получение данных о подписке пользователя с email: ${email}`);
+      res.json(userData); // Возвращаем данные пользователя
+    } catch (err) {
+      console.error(`Ошибка при чтении файла для email: ${email}`, err);
+      res.status(500).json({ ошибка: "Ошибка при чтении данных пользователя" });
+    }
   } else {
-    console.error(`Пользователь не найден для ID: ${userId}`);
+    console.error(`Пользователь не найден для email: ${email}`);
     res.status(404).json({ ошибка: "Пользователь не найден" });
   }
 });
