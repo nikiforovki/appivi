@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "CommonJS",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "shared/*": ["shared/*"],
+      "entities/*": ["entities/*"],
+      "features/*": ["features/*"],
+      "widgets/*": ["widgets/*"],
+      "pages/*": ["pages/*"],
+      "app/*": ["app/*"]
+    }
+  },
+  "include": ["src/**/*", "./server.js", "dotenv-webpack.d.ts"],
+  "exclude": ["node_modules"]
+}
