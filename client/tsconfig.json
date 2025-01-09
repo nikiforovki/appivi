@@ -18,12 +18,71 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "shared/*": ["shared/*"],
-      "entities/*": ["entities/*"],
-      "features/*": ["features/*"],
-      "widgets/*": ["widgets/*"],
-      "pages/*": ["pages/*"],
-      "app/*": ["app/*"]
+      "@shared/*": ["shared/*"],
+      "@shared/theme-toggle-button": [
+        "shared/ui/theme-toggle-button/ThemeToggleButton"
+      ],
+      "@shared/error-boundary": ["shared/ui/error-boundary/ErrorBoundary"],
+      "@shared/routes": ["shared/constants/routes"],
+      "@shared/theme-provider": ["shared/context/ThemeContext"],
+      "@shared/api-routes": ["shared/api/resources"],
+      "@entities/card": ["entities/card/Card"],
+      "@entities/card2": ["entities/card/Card2"],
+      "@entities/card3": ["entities/card/Card3"],
+      "@shared/skeleton-card": ["shared/skeleton/SkeletonCard"],
+      "@shared/skeleton": ["shared/skeleton/Skeleton"],
+      "@shared/free-trial-button": [
+        "shared/ui/free-Trial-Button/FreeTrialButton"
+      ],
+      "@shared/toggle-theme": ["shared/utils/theme"],
+      "@shared/use-theme": ["shared/context/ThemeContext"],
+      "@shared/search-icon": ["shared/assets/icons/SearchIcon"],
+      "@shared/icon-component": ["shared/assets/icons/IconComponent"],
+      "@shared/logo-ivi": ["shared/assets/icons/LogoIvi"],
+      "@shared/user-icon": ["shared/assets/icons/UserIcon"],
+      "@shared/custom-slider": ["shared/slider/customSlider/CustomSlider"],
+      "@shared/slider-settings": ["shared/slider/customSlider/sliderSettings"],
+      "@entities/*": ["entities/*"],
+      "@features/*": ["features/*"],
+      "@features/btn-login": ["features/auth/ui/BtnLogin/BtnLogin"],
+      "@features/sign-up": ["features/auth/singUp/SingUp"],
+      "@features/sing-in": ["features/auth/singIn/SingIn"],
+      "@features/auth-detalis": [
+        "features/personalAccount/userProfile/authDetalis/AuthDetalis"
+      ],
+      "@features/chat-support": [
+        "features/chatSupport/chatSupport/ChatSupport"
+      ],
+      "@features/validation-schema": [
+        "features/personalAccount/subscriptionModalValidationSchema/SubscriptionModalValidationSchema"
+      ],
+      "@features/subscription-modal": [
+        "features/personalAccount/subscription/subscriptionModal/SubscriptionModal"
+      ],
+      "@widgets/*": ["widgets/*"],
+      "@widgets/header": ["widgets/layout/header/Header"],
+      "@widgets/btn-search-icon": [
+        "widgets/layout/header//ui/BtnSearchIcon/BtnSearchIcon"
+      ],
+      "@widgets/main": ["widgets/layout/main/Main"],
+      "@widgets/layout": ["widgets/layout/Layout"],
+      "@widgets/movie-catalog": ["widgets/movie/movie-catalog/MovieCatalog"],
+      "@widgets/movie-pagination": [
+        "widgets/movie/movie-pagination/MoviePagination"
+      ],
+      "@pages/*": ["pages/*"],
+      "@pages/films": ["pages/FilmsList/FilmsList"],
+      "@pages/serials": ["pages/SerialsList/SerialsList"],
+      "@pages/cartoons": ["pages/CartoonsList/CartoonsList"],
+      "@app/*": ["app/*"],
+      "@app/store": ["app/redux/store/store"],
+      "@app/set-user": ["app/redux/slices/userSlice"],
+      "@app/create-user": ["app/redux/slices/userSlice"],
+      "@app/chat-slice": ["app/redux/slices/chatSlice"],
+      "@app/use-get-animated-series-query": ["app/redux/api/movieApi"],
+      "@app/use-get-movies-query": ["app/redux/api/movieApi"],
+      "@app/use-get-amediateka-series-query": ["app/redux/api/movieApi"],
+      "@app/api-hooks": ["app/redux/api/movieApi"]
     }
   },
   "include": ["src/**/*", "./server.js", "dotenv-webpack.d.ts"],

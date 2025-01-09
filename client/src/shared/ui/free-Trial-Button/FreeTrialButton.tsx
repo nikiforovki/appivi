@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FreeTrialButtonProps } from './types';
 
-const StyledFreeTrialButtonWrapper = styled.button<FreeTrialButtonProps>`
+const StyledFreeTrialButtonWrapper = styled.button<{ $hideOnMobile?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,11 +11,11 @@ const StyledFreeTrialButtonWrapper = styled.button<FreeTrialButtonProps>`
   border-radius: 8px;
   background-color: #f30745;
   color: white;
-  cursor: pointer;
   font-family: 'HelveticaNeue', sans-serif;
+  cursor: pointer;
 
-  ${({ hideOnMobile }) =>
-    hideOnMobile &&
+  ${({ $hideOnMobile }) =>
+    $hideOnMobile &&
     `
     @media (max-width: 1100px) {
       display: flex; 
@@ -25,8 +25,8 @@ const StyledFreeTrialButtonWrapper = styled.button<FreeTrialButtonProps>`
     }
   `}
 
-  ${({ hideOnMobile }) =>
-    !hideOnMobile &&
+  ${({ $hideOnMobile }) =>
+    !$hideOnMobile &&
     `
     @media (max-width: 1100px) {
       display: none; 
@@ -42,7 +42,10 @@ const FreeTrialButton: React.FC<FreeTrialButtonProps> = ({
   hideOnMobile,
 }) => {
   return (
-    <StyledFreeTrialButtonWrapper onClick={onClick} hideOnMobile={hideOnMobile}>
+    <StyledFreeTrialButtonWrapper
+      onClick={onClick}
+      $hideOnMobile={hideOnMobile}
+    >
       Смотреть 60 дней бесплатно
     </StyledFreeTrialButtonWrapper>
   );

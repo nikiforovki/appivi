@@ -3,14 +3,15 @@ import { darkTheme, lightTheme, applyTheme } from '@/shared/utils/theme';
 import { Theme } from '@/shared/utils/types';
 import { ThemeContextType } from './types';
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const initialContextValue: ThemeContextType = {
+  theme: darkTheme,
+  setTheme: () => {},
+};
+
+const ThemeContext = createContext<ThemeContextType>(initialContextValue);
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme должен использоваться внутри ThemeProvider');
-  }
-  return context;
+  return useContext(ThemeContext);
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({

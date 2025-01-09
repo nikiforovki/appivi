@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import UserIcon from '@/shared/assets/icons/UserIcon';
+import UserIcon from '@shared/user-icon';
 import { BtnLoginProps } from './types';
 
 const BtnLoginWrapper = styled.button`
@@ -16,6 +16,17 @@ const BtnLoginWrapper = styled.button`
   box-shadow: 0 2px 4px #1f1b2e;
   cursor: pointer;
   font-family: 'HelveticaNeue', sans-serif;
+  padding: 0 12px;
+
+  @media (min-width: 360px) and (max-width: 700px) {
+    gap: 0;
+    padding: 0 8px;
+    justify-content: center;
+
+    span {
+      display: none;
+    }
+  }
 `;
 
 const UserBtn = styled.div`
@@ -24,6 +35,9 @@ const UserBtn = styled.div`
   border-radius: 4px;
   background-color: rgba(108, 99, 255, 0.05);
   border: 2px solid rgba(108, 99, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const BtnLogin: React.FC<BtnLoginProps> = ({ onClick }) => {
@@ -32,7 +46,7 @@ const BtnLogin: React.FC<BtnLoginProps> = ({ onClick }) => {
       <UserBtn>
         <UserIcon />
       </UserBtn>
-      Войти
+      <span>Войти</span>
     </BtnLoginWrapper>
   );
 };

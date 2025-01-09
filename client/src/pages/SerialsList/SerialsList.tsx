@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Card from '@/shared/slider/card/Card2';
-import Header from '@/widgets/layout/header/Header';
-import { Skeleton2 } from '@/shared/skeleton/Skeleton';
-import { useGetAmediatekaSeriesQuery } from '@/app/redux/api/movieApi';
+import Card2 from '@entities/card2';
+import Header from '@widgets/header';
+import { Skeleton2 } from '@shared/skeleton';
+import { useGetAmediatekaSeriesQuery } from '@app/use-get-amediateka-series-query';
 import { Movie } from './types';
 import {
   StyledContainer,
@@ -15,8 +15,8 @@ import {
 } from './serialsList.styled';
 
 const SerialsList: React.FC<{ searchTerm?: string }> = ({ searchTerm }) => {
-  const [page, setPage] = useState<number>(1);
-  const [perPage] = useState<number>(8);
+  const [page, setPage] = useState(1);
+  const [perPage] = useState(8);
 
   const { data: series, isLoading, isError } = useGetAmediatekaSeriesQuery();
 
@@ -71,7 +71,7 @@ const SerialsList: React.FC<{ searchTerm?: string }> = ({ searchTerm }) => {
         <StyledTitle>Сериалы смотреть онлайн</StyledTitle>
         <StyledCardsContainer>
           {paginatedSeries.map((serial: Movie) => (
-            <Card
+            <Card2
               key={serial.id}
               title={serial.title}
               img={serial.img}

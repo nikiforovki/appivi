@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import ChatSupport from '@/features/chatSupport/chatSupport/ChatSupport';
+import ChatSupport from '@features/chat-support';
 
 const StyledButton = styled.button`
   height: 40px;

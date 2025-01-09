@@ -1,7 +1,7 @@
 import { Theme } from './types';
 
 export const darkTheme: Theme = {
-  background: 'rgb(30, 33, 61)',
+  background: '#1E213D',
   text: '#fff',
   primary: '#6c63ff',
   secondary: '#333',
@@ -9,7 +9,7 @@ export const darkTheme: Theme = {
 
 export const lightTheme: Theme = {
   background: '#D3D3D3',
-  text: '#333',
+  text: '#0a0909',
   primary: '#8a8aff',
   secondary: '#f0f0f0',
 };

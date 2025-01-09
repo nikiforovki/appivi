@@ -23,7 +23,7 @@ const SubscriptionLabel = styled.label`
 const SubscriptionCheckbox: React.FC<SubscriptionCheckboxProps> = ({
   onSubscriptionChange,
 }) => {
-  const [selectedSubscription, setSelectedSubscription] = useState<string>('');
+  const [selectedSubscription, setSelectedSubscription] = useState('');
 
   const handleSubscriptionChange = (event: SubscriptionChangeEvent) => {
     const subscription = event.target.value;

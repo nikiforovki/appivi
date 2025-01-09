@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SkeletonCard from '@/shared/skeleton/SkeletonCard';
+import SkeletonCard from '@shared/skeleton-card';
 import { Category } from './types';
 
 const CategoryInfinityScroll: React.FC = () => {

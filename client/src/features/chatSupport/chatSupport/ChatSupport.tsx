@@ -2,29 +2,21 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import io from 'socket.io-client';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, addMessage, setMessages } from '@/app/redux/slices/chatSlice';
+import { setUser, addMessage, setMessages } from '@app/chat-slice';
 import LoginForm from '../loginForm/LoginForm';
 import Messages from '../messages/Messages';
 import MessageInput from '../messageInput/MessageInput';
 import { useNavigate } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import { Message, ChatState } from './types';
+import {
+  SOCKET_URL,
+  API_URL,
+  UPLOAD_URL,
+  API_ROUTES,
+} from '../../../shared/api/resources';
 
-const socketUrl = process.env.REACT_APP_SOCKET_URL;
-const apiUrl = process.env.REACT_APP_API_URL;
-const uploadUrl = process.env.REACT_APP_UPLOAD_URL;
-
-if (!socketUrl) {
-  throw new Error('REACT_APP_SOCKET_URL is not defined');
-}
-if (!apiUrl) {
-  throw new Error('REACT_APP_API_URL is not defined');
-}
-if (!uploadUrl) {
-  throw new Error('REACT_APP_UPLOAD_URL is not defined');
-}
-
-const socket = io(socketUrl);
+const socket = io(SOCKET_URL);
 
 const StyledConteiner = styled.div`
   display: flex;
@@ -88,7 +80,7 @@ const ChatSupport: React.FC = () => {
 
   useEffect(() => {
     if (email && name) {
-      fetch(`${apiUrl}/chat`)
+      fetch(`${API_URL}${API_ROUTES.MOVIES}`)
         .then((response) => response.json())
         .then((data) => dispatch(setMessages([...messages, ...data.chats])))
         .catch((error) =>
@@ -121,7 +113,7 @@ const ChatSupport: React.FC = () => {
     } else {
       if (newMessage.trim() === '') return;
 
-      fetch(`${apiUrl}/chat`, {
+      fetch(`${API_URL}${API_ROUTES.MOVIES}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,6 +142,7 @@ const ChatSupport: React.FC = () => {
     },
     [],
   );
+
   const sendFile = useCallback(() => {
     if (!selectedFile) return;
 
@@ -162,7 +155,7 @@ const ChatSupport: React.FC = () => {
       formData.append('name', name);
     }
 
-    fetch(uploadUrl, {
+    fetch(UPLOAD_URL, {
       method: 'POST',
       body: formData,
     })
@@ -186,7 +179,7 @@ const ChatSupport: React.FC = () => {
       }
 
       try {
-        const response = await fetch(uploadUrl, {
+        const response = await fetch(UPLOAD_URL, {
           method: 'POST',
           body: formData,
         });

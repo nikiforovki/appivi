@@ -4,7 +4,7 @@ import { ChatState, Message } from '../types/types';
 const initialState: ChatState = {
   email: null,
   name: null,
-  messages: [] as Message[],
+  messages: [],
 };
 
 const chatSlice = createSlice({

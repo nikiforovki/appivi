@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import styled from 'styled-components';
-import MoviePagination from '../movie-pagination/MoviePagination';
+import MoviePagination from '@widgets/movie-pagination';
 import { FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { SearchChangeEvent, SearchTermState } from './types';

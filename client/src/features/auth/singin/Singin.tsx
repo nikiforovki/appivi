@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '@/app/redux/slices/userSlice';
+import { setUser } from '@app/set-user';
 import { FaTimes } from 'react-icons/fa';
 import { SignInProps, SignInForm } from './types';
 import {
@@ -16,14 +16,14 @@ import {
   StyledCloseButton,
   StyledSignInButton,
   StyledRegistrationText,
-} from './Singin.styled';
+} from './SingIn.styled';
 
 const SignIn: React.FC<SignInProps> = ({
   isOpen = false,
   onClose,
   onOpenSingUp,
 }) => {
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState('');
   const {
     register,
     handleSubmit,

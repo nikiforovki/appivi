@@ -4,11 +4,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useDispatch } from 'react-redux';
-import { createUser } from '@/app/redux/slices/userSlice';
+import { createUser } from '@app/create-user';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
 import { FormData } from './types';
-import { AppDispatch } from '@/app/redux/store/store';
+import { AppDispatch } from '@app/store';
 import {
   StyledContainer,
   StyledContent,
@@ -23,7 +23,7 @@ import {
 } from './SingUp.styled';
 
 const SignUp: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const {
     register,
@@ -31,9 +31,9 @@ const SignUp: React.FC = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>();
-  const [error, setError] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignUp: SubmitHandler<FormData> = async (data) => {
     const { email, password, confirmPassword } = data;
@@ -62,9 +62,9 @@ const SignUp: React.FC = () => {
         }),
       );
       navigate('/authdetalis');
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error signing up:', error);
-      setError(`Sign up failed: ${error.message}`);
+      setError(`Sign up failed: ${error}`);
     } finally {
       setIsLoading(false);
     }

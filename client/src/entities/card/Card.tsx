@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SkeletonCard from '../../skeleton/SkeletonCard';
+import SkeletonCard from '@shared/skeleton-card';
 import { CardProps } from './types';
 
 const StyledCardWrapper = styled.div`
@@ -31,7 +31,6 @@ const StyledCardWrapper = styled.div`
 const StyledCardImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 `;

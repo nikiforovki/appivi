@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Card from '@/shared/slider/card/Card3';
-import { Skeleton2 } from '@/shared/skeleton/Skeleton';
+import Card3 from '@entities/card3';
+import { Skeleton2 } from '@shared/skeleton';
 import styled from 'styled-components';
 import { Movie, MoviePaginationProps } from './types';
 
@@ -108,7 +108,7 @@ const MoviePagination: React.FC<MoviePaginationProps> = ({ searchTerm }) => {
       ) : (
         <StyledContentWrapper>
           {filteredMovies.map((movie: Movie) => (
-            <Card
+            <Card3
               key={movie.id}
               title={movie.title}
               img={movie.img}

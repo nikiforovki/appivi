@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetMoviesQuery } from '@/app/redux/api/movieApi';
+import { useGetMoviesQuery } from '@app/use-get-movies-query';
 import { Movie, MovieListState, GetMoviesResult } from './types';
 
 function MovieList(): React.ReactElement {

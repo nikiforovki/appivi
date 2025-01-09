@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import CustomSlider from '@/shared/slider/customSlider/CustomSlider';
-import Card from '@/shared/slider/card/Card';
-import Card2 from '@/shared/slider/card/Card2';
+import CustomSlider from '@shared/custom-slider';
+import Card from '@entities/card';
+import Card2 from '@entities/card2';
 import Footer from '../footer/Footer';
-import { Skeleton1, Skeleton2 } from '../../../shared/skeleton/Skeleton';
-import { Movie } from './types';
+import { Skeleton1, Skeleton2 } from '@shared/skeleton';
 import {
   mainSliderSettings,
   customSliderSettings,
-} from '@/shared/slider/customSlider/sliderSettings';
-import FreeTrialButton from '@/shared/ui/free-Trial-Button/FreeTrialButton';
+} from '@shared/slider-settings';
+import FreeTrialButton from '@shared/free-trial-button';
+import {
+  useGetMoviesQuery,
+  useGetAmediatekaSeriesQuery,
+  useGetAnimatedSeriesQuery,
+} from '@app/api-hooks';
 
 const StyledMainContainer = styled.div`
   flex-direction: column;
@@ -34,54 +38,41 @@ const StyledNameChapter = styled.div`
 `;
 
 const Main: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [newmovie, setNewMovies] = useState<Movie[]>([]);
-  const [amediatekaSeries, setAmediatekaSeries] = useState<Movie[]>([]);
-  const [animatedSeries, setAnimatedSeries] = useState<Movie[]>([]);
-  const [watchingNow, setWatchingNow] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          moviesResponse,
-          newMoviesResponse,
-          amediatekaSeriesResponse,
-          animatedSeriesResponse,
-          watchingNowResponse,
-        ] = await Promise.all([
-          fetch('/api/movies').then((response) => response.json()),
-          fetch('/api/newmovies').then((response) => response.json()),
-          fetch('/api/amediatekaSeries').then((response) => response.json()),
-          fetch('/api/animatedSeries').then((response) => response.json()),
-          fetch('/api/watchingNow').then((response) => response.json()),
-        ]);
+  const {
+    data: moviesResponse,
+    isLoading: isMoviesLoading,
+    error: moviesError,
+  } = useGetMoviesQuery();
 
-        setMovies(moviesResponse.movies);
-        setNewMovies(newMoviesResponse.newmovies);
-        setAmediatekaSeries(amediatekaSeriesResponse.amediatekaSeries);
-        setAnimatedSeries(animatedSeriesResponse.animatedSeries);
-        setWatchingNow(watchingNowResponse.watchingNow);
-      } catch (error) {
-        console.error('Error:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const {
+    data: amediatekaSeriesResponse,
+    isLoading: isAmediatekaSeriesLoading,
+    error: amediatekaSeriesError,
+  } = useGetAmediatekaSeriesQuery();
 
-    fetchData();
-  }, []);
+  const {
+    data: animatedSeriesResponse,
+    isLoading: isAnimatedSeriesLoading,
+    error: animatedSeriesError,
+  } = useGetAnimatedSeriesQuery();
+
+  const isLoading =
+    isMoviesLoading || isAmediatekaSeriesLoading || isAnimatedSeriesLoading;
 
   const handleNavigateToSingUp = () => {
     navigate('/singup');
   };
 
+  if (moviesError || amediatekaSeriesError || animatedSeriesError) {
+    return <div>Error loading data</div>;
+  }
+
   return (
     <StyledMainContainer>
       <CustomSlider
-        movies={movies}
+        movies={moviesResponse?.movies || []}
         settings={mainSliderSettings}
         CardComponent={Card}
         isLoading={isLoading}
@@ -90,17 +81,10 @@ const Main: React.FC = () => {
       <StyledButtonContainer>
         <FreeTrialButton hideOnMobile={true} onClick={handleNavigateToSingUp} />
       </StyledButtonContainer>
-      <StyledNameChapter>Фильмы новинки</StyledNameChapter>
-      <CustomSlider
-        movies={newmovie}
-        settings={customSliderSettings}
-        CardComponent={Card2}
-        isLoading={isLoading}
-        SkeletonComponent={Skeleton2}
-      />
+
       <StyledNameChapter>Сериалы Amediateka</StyledNameChapter>
       <CustomSlider
-        movies={amediatekaSeries}
+        movies={amediatekaSeriesResponse?.amediatekaSeries || []}
         settings={customSliderSettings}
         CardComponent={Card2}
         isLoading={isLoading}
@@ -108,7 +92,7 @@ const Main: React.FC = () => {
       />
       <StyledNameChapter>Анимационные сериалы</StyledNameChapter>
       <CustomSlider
-        movies={animatedSeries}
+        movies={animatedSeriesResponse?.animatedSeries || []}
         settings={customSliderSettings}
         CardComponent={Card2}
         isLoading={isLoading}

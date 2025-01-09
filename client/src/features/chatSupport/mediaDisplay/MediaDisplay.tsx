@@ -1,6 +1,6 @@
 import React from 'react';
 import { MediaDisplayProps } from './types';
-import { API_ROUTES } from '@/shared/api/resources';
+import { API_ROUTES } from '@shared/api-routes';
 
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ filename }) => {
   const fileUrl = `${process.env.REACT_APP_BASE_URL}${API_ROUTES.UPLOAD_RESOURCE}/${encodeURIComponent(filename)}`;

@@ -16,15 +16,18 @@ const movieApi = createApi({
       query: () => {
         return API_ROUTES.MOVIES;
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.movies) {
           return [
-            ...result.movies.map(({ id }) => ({ type: 'Movie' as const, id })),
-            { type: 'Movie' as const, id: 'LIST' },
+            ...result.movies.map(({ id }) => ({
+              type: 'Movie' as 'Movie',
+              id,
+            })),
+            { type: 'Movie' as 'Movie', id: 'LIST' },
           ];
         }
 
-        return [{ type: 'Movie' as const, id: 'LIST' }];
+        return [{ type: 'Movie' as 'Movie', id: 'LIST' }];
       },
     }),
 
@@ -32,18 +35,18 @@ const movieApi = createApi({
       query: () => {
         return API_ROUTES.AMEDIATEKA_SERIES;
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.amediatekaSeries) {
           return [
             ...result.amediatekaSeries.map(({ id }) => ({
-              type: 'AmediatekaSeries' as const,
+              type: 'AmediatekaSeries' as 'AmediatekaSeries',
               id,
             })),
-            { type: 'AmediatekaSeries' as const, id: 'LIST' },
+            { type: 'AmediatekaSeries' as 'AmediatekaSeries', id: 'LIST' },
           ];
         }
 
-        return [{ type: 'AmediatekaSeries' as const, id: 'LIST' }];
+        return [{ type: 'AmediatekaSeries' as 'AmediatekaSeries', id: 'LIST' }];
       },
     }),
 
@@ -51,18 +54,18 @@ const movieApi = createApi({
       query: () => {
         return API_ROUTES.ANIMATED_SERIES;
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.animatedSeries) {
           return [
             ...result.animatedSeries.map(({ id }) => ({
-              type: 'AnimatedSeries' as const,
+              type: 'AnimatedSeries' as 'AnimatedSeries',
               id,
             })),
-            { type: 'AnimatedSeries' as const, id: 'LIST' },
+            { type: 'AnimatedSeries' as 'AnimatedSeries', id: 'LIST' },
           ];
         }
 
-        return [{ type: 'AnimatedSeries' as const, id: 'LIST' }];
+        return [{ type: 'AnimatedSeries' as 'AnimatedSeries', id: 'LIST' }];
       },
     }),
 
@@ -81,9 +84,7 @@ const movieApi = createApi({
       query: (email) => {
         return `${API_ROUTES.USERS}/${email}`;
       },
-      providesTags: (result, error, email) => [
-        { type: 'Subscription', id: email },
-      ],
+      providesTags: (email) => [{ type: 'Subscription', id: email }],
     }),
   }),
 });

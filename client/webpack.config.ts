@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import Dotenv from 'dotenv-webpack';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 interface ProxyConfig {
   context?: string[];
@@ -34,6 +35,7 @@ const config: Configuration = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    plugins: [new TsconfigPathsPlugin()],
     alias: {
       '@': path.resolve(__dirname, 'src/'),
       '@styles': path.resolve(__dirname, 'src/styles/'),

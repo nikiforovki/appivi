@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import SubscriptionCheckbox from '../subscriptionCheckbox/SubscriptionCheckbox';
-import { setSubscription } from '@/app/redux/slices/userSlice';
-import LogoIvi from '@/shared/assets/icons/LogoIvi';
-import { useSelector, useDispatch } from 'react-redux';
+import { setSubscription } from '@app/create-user';
+import LogoIvi from '@shared/logo-ivi';
+import { useDispatch } from 'react-redux';
 import { FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { User, SubscriptionRequest } from './types';
-import SubscriptionModal from '@/features/personalAccount/subscription/subscriptionModal/SubscriptionModal';
+import { SubscriptionRequest } from './types';
+import SubscriptionModal from '@features/subscription-modal';
 import {
   usePostSubscriptionMutation,
   useGetUserByEmailQuery,
 } from '@/app/redux/api/movieApi';
-
 import {
   StyledContainer,
   StyledHeader,
@@ -24,20 +23,19 @@ import {
   StyledLogoButton,
   StyledCloseButton,
 } from './authDetalis.styled';
+import { useAppSelector } from '@app/store';
 
 const AuthDetails: React.FC = () => {
-  const user: User = useSelector((state: { user: User }) => state.user);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [selectedSubscription, setSelectedSubscription] = useState<string>('');
+  const [selectedSubscription, setSelectedSubscription] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const [postSubscription, { isLoading, error }] =
-    usePostSubscriptionMutation();
-  const {
-    data: userData,
-    isLoading: isUserLoading,
-    error: userError,
-  } = useGetUserByEmailQuery(user.email);
+  const [postSubscription, { error }] = usePostSubscriptionMutation();
+  const { data: userData, error: userError } = useGetUserByEmailQuery(
+    user?.email ?? '',
+    { skip: !user?.email },
+  );
 
   useEffect(() => {
     if (userData) {
@@ -54,10 +52,12 @@ const AuthDetails: React.FC = () => {
   };
 
   const handleModalSubmit = async () => {
+    if (!user) return;
+
     const requestBody: SubscriptionRequest = {
-      email: user?.email,
-      token: user?.token,
-      id: user?.id,
+      email: user.email ?? '',
+      token: user.token ?? '',
+      id: user.id ?? '',
       subscription: selectedSubscription,
       status: 'succeeded',
       error: null,
@@ -74,6 +74,20 @@ const AuthDetails: React.FC = () => {
   const handleSingClickUp = () => {
     navigate('/');
   };
+
+  if (userError) {
+    const errorMessage =
+      'message' in userError
+        ? userError.message
+        : 'Ошибка при загрузке данных пользователя';
+    return <p>{errorMessage}</p>;
+  }
+
+  if (error) {
+    const errorMessage =
+      'message' in error ? error.message : 'Ошибка при сохранении подписки';
+    return <p>{errorMessage}</p>;
+  }
 
   return (
     <StyledContainer>

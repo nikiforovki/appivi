@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from '../slices/userSlice';
 import chatReducer from '../slices/chatSlice';
 import movieApi from '../api/movieApi';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 const persistConfig = {
   key: 'root',
@@ -31,3 +32,5 @@ export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

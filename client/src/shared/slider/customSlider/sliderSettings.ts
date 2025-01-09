@@ -28,14 +28,18 @@ export const customSliderSettings = {
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
+  autoplay: false,
   autoplaySpeed: 2000,
-  centerMode: false,
+  centerMode: true,
+  centerPadding: '100px',
   responsive: [
     {
       breakpoint: 1920,
       settings: {
         slidesToShow: 6,
         slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '100px',
       },
     },
     {
@@ -43,6 +47,8 @@ export const customSliderSettings = {
       settings: {
         slidesToShow: 6,
         slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '80px',
       },
     },
     {
@@ -50,6 +56,8 @@ export const customSliderSettings = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '60px',
       },
     },
     {
@@ -57,6 +65,8 @@ export const customSliderSettings = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '100px',
       },
     },
     {
@@ -64,7 +74,8 @@ export const customSliderSettings = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        centerPadding: '50px',
+        centerMode: true,
+        centerPadding: '100px',
       },
     },
   ],

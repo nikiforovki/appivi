@@ -15,39 +15,11 @@ const StyledCardWrapper = styled.div`
   &:hover {
     transform: translateY(-5px);
   }
-
-  @media (min-width: 375px) and (max-width: 480px) {
-    margin-left: 100px;
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    margin-left: 10px;
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    margin-left: 10px;
-  }
-  @media (min-width: 1025px) and (max-width: 1280px) {
-    margin-left: 10px;
-  }
-
-  @media (min-width: 1280px) and (max-width: 1366px) {
-    margin-left: 10px;
-  }
-
-  @media (min-width: 1366px) and (max-width: 1920px) {
-    margin-left: 10px;
-  }
-
-  @media (min-width: 1920px) {
-    margin-left: 10px;
-  }
 `;
 
 const StyledCardImage = styled.img`
   width: 100%;
   height: 70%;
-  object-fit: cover;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 `;

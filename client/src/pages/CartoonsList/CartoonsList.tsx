@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import Card from '@/shared/slider/card/Card2';
-import { useNavigate } from 'react-router-dom';
-import Header from '@/widgets/layout/header/Header';
-import { Skeleton2 } from '@/shared/skeleton/Skeleton';
-import { useGetAnimatedSeriesQuery } from '@/app/redux/api/movieApi';
+import Card from 'entities/card/Card';
+import Header from '@widgets/header';
+import { Skeleton2 } from '@shared/skeleton';
+import { useGetAnimatedSeriesQuery } from '@app/use-get-animated-series-query';
 import { Movie } from './types';
 import {
   StyledContainer,
@@ -16,8 +15,8 @@ import {
 } from './cartoonsList.styled';
 
 const CartoonsList: React.FC<{ searchTerm?: string }> = ({ searchTerm }) => {
-  const [page, setPage] = useState<number>(1);
-  const [perPage] = useState<number>(8);
+  const [page, setPage] = useState(1);
+  const [perPage] = useState(8);
 
   const {
     data: animatedSeries,

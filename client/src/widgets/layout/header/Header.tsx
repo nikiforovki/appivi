@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import LogoIvi from '@/shared/assets/icons/LogoIvi';
-import SignIn from '@/features/auth/singin/Singin';
-import FreeTrialButton from '@/shared/ui/free-Trial-Button/FreeTrialButton';
-import BtnLogin from '@/features/auth/ui/BtnLogin/BtnLogin';
-import BtnSearchIcon from './ui/BtnSearchIcon/BtnSearchIcon';
+import LogoIvi from '@shared/logo-ivi';
+import SignIn from '@features/sing-in';
+import FreeTrialButton from '@shared/free-trial-button';
+import BtnLogin from '@features/btn-login';
+import BtnSearchIcon from '@widgets/btn-search-icon';
 
 const StyledHeaderContainer = styled.div`
   display: flex;

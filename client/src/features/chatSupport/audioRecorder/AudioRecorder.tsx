@@ -26,7 +26,6 @@ const StyledAudioPlayer = styled.audio`
   display: block;
   width: 50%;
   border-radius: 5px;
-  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px #0000001a;
   margin-left: 200px;
   bottom: 40px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from './header/Header';
-import Main from './main/Main';
+import Header from '@widgets/header';
+import Main from '@widgets/main';
 
 const StyledPageContainer = styled.div`
   display: flex;

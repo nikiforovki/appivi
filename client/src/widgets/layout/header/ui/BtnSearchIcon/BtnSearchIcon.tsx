@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchIcon from '@/shared/assets/icons/SearchIcon';
-import IconComponent from '@/shared/assets/icons/IconComponent';
+import SearchIcon from '@shared/search-icon';
+import IconComponent from '@shared/icon-component';
 import { BtnSearchIconProps } from './types';
 
 const StyledBtnSearchIconWrapper = styled.button`

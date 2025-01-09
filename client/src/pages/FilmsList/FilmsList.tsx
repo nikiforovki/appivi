@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import Card from '@/shared/slider/card/Card2';
-import { useNavigate } from 'react-router-dom';
-import Header from '@/widgets/layout/header/Header';
-import { Skeleton2 } from '@/shared/skeleton/Skeleton';
+import Card2 from '@entities/card2';
+import Header from '@widgets/header';
+import { Skeleton2 } from '@shared/skeleton';
 import { FilmsProps } from './types';
-import { useGetMoviesQuery } from '@/app/redux/api/movieApi';
+import { useGetMoviesQuery } from '@app/use-get-movies-query';
 import {
   StyledContainer,
   StyledTitle,
@@ -16,9 +15,8 @@ import {
 } from './filmsList.styled';
 
 const FilmsList: React.FC<FilmsProps> = ({ searchTerm }) => {
-  const [page, setPage] = useState<number>(1);
-  const [perPage] = useState<number>(10);
-  const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [perPage] = useState(10);
 
   const { data: moviesData, isLoading, isError, error } = useGetMoviesQuery();
 
@@ -77,7 +75,7 @@ const FilmsList: React.FC<FilmsProps> = ({ searchTerm }) => {
         <StyledTitle>Фильмы смотреть онлайн</StyledTitle>
         <StyledCardsContainer>
           {paginatedMovies.map((movie) => (
-            <Card
+            <Card2
               key={movie.id}
               title={movie.title}
               img={movie.img}

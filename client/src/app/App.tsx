@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ErrorBoundary from '@/shared/ui/error-boundary/ErrorBoundary';
+import ErrorBoundary from '@shared/error-boundary';
 import '@/app/styles/main.css';
-import SignUp from '@/features/auth/singUp/SingUp';
-import SignIn from '@/features/auth/singin/Singin';
-import AuthDetalis from '@/features/personalAccount/userProfile/authDetalis/AuthDetalis';
-import Layout from '@/widgets/layout/Layout';
-import ChatSupport from '@/features/chatSupport/chatSupport/ChatSupport';
-import MovieCatalog from '@/widgets/movie/movie-catalog/MovieCatalog';
-import Films from '@/pages/FilmsList/FilmsList';
-import Serials from '@/pages/SerialsList/SerialsList';
-import Cartoons from '@/pages/CartoonsList/CartoonsList';
-import ThemeToggleButton from '@/shared/ui/theme-toggle-button/ThemeToggleButton';
-import { ROUTES } from '@/shared/constants/routes';
-import { ThemeProvider } from '@/shared/context/ThemeContext';
+import SignUp from '@features/sign-up';
+import SignIn from '@features/sing-in';
+import AuthDetalis from '@features/auth-detalis';
+import Layout from '@widgets/layout';
+import ChatSupport from '@features/chat-support';
+import MovieCatalog from '@widgets/movie-catalog';
+import Films from '@pages/films';
+import Serials from '@pages/serials';
+import Cartoons from '@pages/cartoons';
+import ThemeToggleButton from '@shared/theme-toggle-button';
+import { ROUTES } from '@shared/routes';
+import { ThemeProvider } from '@shared/theme-provider';
 
 const App: React.FC = () => {
   return (
